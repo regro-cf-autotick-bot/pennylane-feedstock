@@ -43,6 +43,7 @@ test:
     - pl-device-test --help
   requires:
     - pip
+    - pytest
 
 about:
   home: https://github.com/PennyLaneAI/pennylane
