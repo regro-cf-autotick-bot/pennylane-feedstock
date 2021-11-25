@@ -1,5 +1,5 @@
 {% set name = "PennyLane" %}
-{% set version = "0.19.0" %}
+{% set version = "0.19.1" %}
 
 
 package:
@@ -8,10 +8,10 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: a9ddadebe48c1389212975c978ef4ed7f719b23c94bc798be89af80c3b7c2b1e
+  sha256: 3fed3689fe8b2a8c35f38d679489d40731b1d3fd2683a783df9627ca79def575
 
 build:
-  number: 1
+  number: 0
   noarch: python
   entry_points:
     - pl-device-test=pennylane.devices.tests:cli
