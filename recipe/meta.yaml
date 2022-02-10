@@ -1,5 +1,5 @@
 {% set name = "PennyLane" %}
-{% set version = "0.20.0" %}
+{% set version = "0.21.0" %}
 
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: bae6473c86b6a52c12c040d062c4620274a9fe67ee4ffc4b0452df93b52b6d14
+  sha256: 67238e9b705ccd430536b6b63544278f635772374f9cb29ee2c5c37f65dff4a7
 
 build:
   number: 0
@@ -28,8 +28,9 @@ requirements:
     - cachetools
     - networkx
     - numpy
-    - pennylane-lightning >=0.18
+    - pennylane-lightning >=0.21
     - python >=3.7
+    - retworkx
     - scipy
     - semantic_version ==2.6
     - toml
@@ -37,7 +38,6 @@ requirements:
 test:
   imports:
     - pennylane
-    - pennylane.beta
   commands:
     - pip check
     - pl-device-test --help
