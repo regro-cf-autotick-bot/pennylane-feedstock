@@ -1,21 +1,20 @@
-{% set name = "PennyLane" %}
-{% set version = "0.22.2" %}
-
+{% set name = "pennylane" %}
+{% set version = "0.23.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 115e5cead8e656d0a766f33ec1b4b1e8a1787dd891fa95516932d48d5bc8afc1
+  url: https://github.com/PennyLaneAI/pennylane/archive/v{{ version }}.tar.gz
+  sha256: b2d37227e098d4fc58556a07ba76eb5e2cefef52bff5605b465a01e5acb6941c
 
 build:
-  number: 0
-  noarch: python
   entry_points:
     - pl-device-test=pennylane.devices.tests:cli
+  noarch: python
   script: {{ PYTHON }} -m pip install . -vv
+  number: 0
 
 requirements:
   host:
@@ -28,7 +27,7 @@ requirements:
     - cachetools
     - networkx
     - numpy
-    - pennylane-lightning >=0.22
+    - pennylane-lightning >=0.23
     - python >=3.7
     - retworkx
     - scipy
