@@ -1,5 +1,5 @@
 {% set name = "pennylane" %}
-{% set version = "0.23.0" %}
+{% set version = "0.24.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/PennyLaneAI/pennylane/archive/v{{ version }}.tar.gz
-  sha256: b2d37227e098d4fc58556a07ba76eb5e2cefef52bff5605b465a01e5acb6941c
+  sha256: 6851193cf1d911333dc019221b9a1af0fa3294898a932df61448863370bb9306
 
 build:
   entry_points:
@@ -23,11 +23,11 @@ requirements:
   run:
     - appdirs
     - autograd
-    - autoray
+    - autoray >=0.3.1
     - cachetools
     - networkx
     - numpy
-    - pennylane-lightning >=0.23
+    - pennylane-lightning >=0.24
     - python >=3.7
     - retworkx
     - scipy
