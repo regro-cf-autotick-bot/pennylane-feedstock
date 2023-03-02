@@ -1,57 +1,129 @@
 {% set name = "pennylane" %}
-{% set version = "0.23.0" %}
+{% set version = "0.29.0" %}
+
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/PennyLaneAI/pennylane/archive/v{{ version }}.tar.gz
-  sha256: b2d37227e098d4fc58556a07ba76eb5e2cefef52bff5605b465a01e5acb6941c
+  - url: https://github.com/PennyLaneAI/pennylane/archive/refs/tags/v{{ version }}.tar.gz
+    sha256: e59e042174abd8f1596034d3f4dd113b24d06e4aadb5f2e5828fa3411fabf0df
+    folder: pennylane
+  - url: https://github.com/PennyLaneAI/pennylane-lightning/archive/refs/tags/v{{ version }}.tar.gz
+    folder: pennylane-lightning
+    sha256: da9912f0286d1a54051cc19cf8bdbdcd732795636274c95f376db72a88e52d85
 
 build:
-  entry_points:
-    - pl-device-test=pennylane.devices.tests:cli
-  noarch: python
-  script: {{ PYTHON }} -m pip install . -vv
   number: 0
+  skip: true  # [win]
 
 requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    # Needed for Windows
+    - cmake
+    - ninja
+    - make
   host:
-    - pip
-    - python >=3.7
+    - python
   run:
-    - appdirs
-    - autograd
-    - autoray
-    - cachetools
-    - networkx
-    - numpy
-    - pennylane-lightning >=0.23
-    - python >=3.7
-    - retworkx
-    - scipy
-    - semantic_version ==2.6
-    - toml
-
+    - pennylane-core
+    - pennylane-lightning-core
+    
 test:
   imports:
     - pennylane
   commands:
+    - python -c "import pennylane as qml; qml.about()"
     - pip check
     - pl-device-test --help
+    - pl-device-test --device default.qubit --shots None --skip-ops
+    - pl-device-test --device default.qubit --shots 10000 --skip-ops
+    - pl-device-test --device lightning.qubit --shots None --skip-ops
+    - pl-device-test --device lightning.qubit --shots 10000 --skip-ops
+
   requires:
+    - setuptools <=64.0.2 # version requirement from cvxpy
+    - flaky
     - pip
     - pytest
+    - pytest-mock
+
+outputs:
+
+  - name: pennylane-core
+    version: {{ version }}
+    build:
+      run_exports:
+        - {{ pin_subpackage('pennylane-core', max_pin='x.x') }}
+      entry_points:
+        - pl-device-test=pennylane.devices.tests:cli
+      script: cd "${SRC_DIR}/pennylane" && {{ PYTHON }} -m pip install . --no-deps -vv
+      number: 0
+    requirements:
+      host:
+        - pip
+        - python
+      run:
+        - appdirs
+        - autograd
+        - autoray ==0.3.1
+        - cachetools
+        - cvxopt
+        - cvxpy
+        - networkx
+        - numpy <1.24
+        - opt_einsum
+        - python
+        - requests
+        - retworkx
+        - scipy
+        - semantic_version >=2.10
+        - toml
+
+  - name: pennylane-lightning-core
+    version: {{ version }}
+    build:
+      run_exports:
+        - {{ pin_subpackage('pennylane-lightning-core', max_pin='x.x') }}
+      number: 0
+      # skip: true  # [win and vc<14]
+      skip: true  # [win]
+      script: cd "${SRC_DIR}/pennylane-lightning" && {{ PYTHON }} -m pip install . --no-deps -vv
+    requirements:
+      build:
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
+        # Needed for Windows
+        - cmake
+        - ninja
+        - make
+      host:
+        - libblas
+        - liblapacke
+        - libgomp      # [linux]
+        - llvm-openmp  # [osx]
+        - pip
+        - pybind11
+        - python
+        - setuptools <=64.0.2 # version requirement from cvxpy
+      run:
+        - ninja
+        - numpy
+        - python
 
 about:
   home: https://github.com/PennyLaneAI/pennylane
   summary: PennyLane is a Python quantum machine learning library by Xanadu Inc.
   license: Apache-2.0 AND MIT
   # MIT is pennylane/grouping/graph_colouring.py
-  license_file: LICENSE
+  license_file: pennylane/LICENSE
+  doc_url: https://pennylane.readthedocs.io/en/stable/
 
 extra:
   recipe-maintainers:
     - vincentmr
     - BastianZim
+  feedstock-name: pennylane
