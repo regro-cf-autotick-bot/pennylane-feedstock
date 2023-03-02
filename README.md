@@ -1,23 +1,79 @@
-About pennylane
-===============
+About pennylane-feedstock
+=========================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/pennylane-feedstock/blob/main/LICENSE.txt)
 
 Home: https://github.com/PennyLaneAI/pennylane
 
 Package license: Apache-2.0 AND MIT
 
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/pennylane-feedstock/blob/main/LICENSE.txt)
-
 Summary: PennyLane is a Python quantum machine learning library by Xanadu Inc.
+
+Documentation: https://pennylane.readthedocs.io/en/stable/
 
 Current build status
 ====================
 
 
-<table><tr><td>All platforms:</td>
+<table>
+    
+  <tr>
+    <td>Azure</td>
     <td>
-      <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14636&branchName=main">
-        <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/pennylane-feedstock?branchName=main">
-      </a>
+      <details>
+        <summary>
+          <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14636&branchName=main">
+            <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/pennylane-feedstock?branchName=main">
+          </a>
+        </summary>
+        <table>
+          <thead><tr><th>Variant</th><th>Status</th></tr></thead>
+          <tbody><tr>
+              <td>linux_64_python3.10.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14636&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/pennylane-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_python3.10.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_64_python3.8.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14636&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/pennylane-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_python3.8.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_64_python3.9.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14636&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/pennylane-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_python3.9.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_64_python3.10.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14636&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/pennylane-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_python3.10.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_64_python3.8.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14636&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/pennylane-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_python3.8.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_64_python3.9.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14636&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/pennylane-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_python3.9.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </details>
     </td>
   </tr>
 </table>
@@ -28,6 +84,8 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-pennylane-green.svg)](https://anaconda.org/conda-forge/pennylane) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/pennylane.svg)](https://anaconda.org/conda-forge/pennylane) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/pennylane.svg)](https://anaconda.org/conda-forge/pennylane) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/pennylane.svg)](https://anaconda.org/conda-forge/pennylane) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-pennylane--core-green.svg)](https://anaconda.org/conda-forge/pennylane-core) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/pennylane-core.svg)](https://anaconda.org/conda-forge/pennylane-core) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/pennylane-core.svg)](https://anaconda.org/conda-forge/pennylane-core) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/pennylane-core.svg)](https://anaconda.org/conda-forge/pennylane-core) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-pennylane--lightning--core-green.svg)](https://anaconda.org/conda-forge/pennylane-lightning-core) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/pennylane-lightning-core.svg)](https://anaconda.org/conda-forge/pennylane-lightning-core) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/pennylane-lightning-core.svg)](https://anaconda.org/conda-forge/pennylane-lightning-core) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/pennylane-lightning-core.svg)](https://anaconda.org/conda-forge/pennylane-lightning-core) |
 
 Installing pennylane
 ====================
@@ -39,16 +97,16 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `pennylane` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `pennylane, pennylane-core, pennylane-lightning-core` can be installed with `conda`:
 
 ```
-conda install pennylane
+conda install pennylane pennylane-core pennylane-lightning-core
 ```
 
 or with `mamba`:
 
 ```
-mamba install pennylane
+mamba install pennylane pennylane-core pennylane-lightning-core
 ```
 
 It is possible to list all of the versions of `pennylane` available on your platform with `conda`:
@@ -144,4 +202,5 @@ Feedstock Maintainers
 =====================
 
 * [@BastianZim](https://github.com/BastianZim/)
+* [@vincentmr](https://github.com/vincentmr/)
 
