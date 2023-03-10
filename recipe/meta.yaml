@@ -19,9 +19,6 @@ build:
   skip: true  # [win]
 
 requirements:
-  build:
-    - pip
-    - python
   host:
     - pip
     - python
