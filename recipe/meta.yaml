@@ -16,7 +16,6 @@ source:
 
 build:
   number: 0
-  skip: true  # [win]
 
 requirements:
   host:
@@ -26,6 +25,7 @@ requirements:
 outputs:
   - name: pennylane-core
     build:
+      skip: true  # [win]
       run_exports:
         - {{ pin_subpackage('pennylane-core', max_pin='x.x.x') }}
       entry_points:
@@ -56,6 +56,7 @@ outputs:
 
   - name: pennylane-lightning-core
     build:
+      skip: true  # [win]
       run_exports:
         - {{ pin_subpackage('pennylane-lightning-core', max_pin='x.x.x') }}
       script: cd "${SRC_DIR}/pennylane-lightning" && {{ PYTHON }} -m pip install . --no-deps -vv
@@ -84,7 +85,7 @@ outputs:
   - name: pennylane
     # version: {{ version }}
     build:
-      skip: true
+      skip: true  # [win]
     requirements:
       host:
         - python
