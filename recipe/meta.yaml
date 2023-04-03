@@ -15,7 +15,7 @@ source:
     folder: pennylane-lightning
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   host:
@@ -53,6 +53,12 @@ outputs:
         - scipy
         - semantic_version >=2.10
         - toml
+    test:
+      imports:
+        - pennylane
+      requires:
+        - setuptools
+        - pip
 
   - name: pennylane-lightning-core
     build:
@@ -76,11 +82,19 @@ outputs:
         - pip
         - pybind11
         - python
-        - setuptools <=64.0.2 # version requirement from cvxpy
+        - setuptools
       run:
         - ninja
         - numpy
         - python
+      run_constrained:
+        - pennylane-lightning <0.0a0
+      test:
+      imports:
+        - pennylane_lightning
+      requires:
+        - setuptools
+        - pip
 
   - name: pennylane
     # version: {{ version }}
@@ -106,7 +120,7 @@ outputs:
         - pl-device-test --device lightning.qubit --shots None --skip-ops
         - pl-device-test --device lightning.qubit --shots 10000 --skip-ops
       requires:
-        - setuptools <=64.0.2 # version requirement from cvxpy
+        - setuptools
         - flaky
         - pip
         - pytest
