@@ -89,7 +89,7 @@ outputs:
         - python
       run_constrained:
         - pennylane-lightning <0.0a0
-      test:
+    test:
       imports:
         - pennylane_lightning
       requires:
