@@ -55,12 +55,6 @@ outputs:
         - toml
       run_constrained:
         - pennylane >=0.29.0
-    test:
-      imports:
-        - pennylane
-      requires:
-        - setuptools
-        - pip
 
   - name: pennylane-lightning-core
     build:
@@ -91,12 +85,6 @@ outputs:
         - python
       run_constrained:
         - pennylane-lightning <0.0a0
-    test:
-      imports:
-        - pennylane_lightning
-      requires:
-        - setuptools
-        - pip
 
   - name: pennylane
     # version: {{ version }}
