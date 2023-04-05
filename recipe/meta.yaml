@@ -139,6 +139,7 @@ about:
 
 extra:
   recipe-maintainers:
+    - leofang
     - vincentmr
     - BastianZim
   feedstock-name: pennylane
