@@ -110,6 +110,7 @@ outputs:
       skip: true  # [win]
     requirements:
       run:
+        - python
         - {{ pin_subpackage('pennylane-core', max_pin="x.x.x") }}
         - {{ pin_subpackage('pennylane-lightning-core', max_pin="x.x.x") }}
     test:
