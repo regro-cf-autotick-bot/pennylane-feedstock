@@ -109,6 +109,8 @@ outputs:
     build:
       skip: true  # [win]
     requirements:
+      host:
+        - python
       run:
         - python
         - {{ pin_subpackage('pennylane-core', max_pin="x.x.x") }}
