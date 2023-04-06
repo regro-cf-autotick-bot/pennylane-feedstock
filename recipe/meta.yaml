@@ -13,9 +13,11 @@ source:
   - url: https://github.com/PennyLaneAI/pennylane-lightning/archive/refs/tags/v{{ version }}.tar.gz
     sha256: da9912f0286d1a54051cc19cf8bdbdcd732795636274c95f376db72a88e52d85
     folder: pennylane-lightning
+    #patches:
+    #  - enable_blas.diff
 
 build:
-  number: 1
+  number: 2
 
 requirements:
   host:
@@ -33,7 +35,8 @@ outputs:
       script: cd "${SRC_DIR}/pennylane" && {{ PYTHON }} -m pip install . --no-deps -vv
     requirements:
       build:
-        - python
+        - python                                 # [build_platform != target_platform]
+        - cross-python_{{ target_platform }}     # [build_platform != target_platform]
       host:
         - pip
         - python
@@ -72,19 +75,23 @@ outputs:
       build:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
+        - python                                 # [build_platform != target_platform]
+        - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+        - pybind11                               # [build_platform != target_platform]
         # Needed for Windows
         - cmake
         - ninja
         - make
       host:
-        - libblas
-        - liblapacke
+        #- libblas
+        #- libcblas
         - libgomp      # [linux]
         - llvm-openmp  # [osx]
         - pip
         - pybind11
         - python
         - setuptools
+        - ninja
       run:
         - ninja
         - numpy
