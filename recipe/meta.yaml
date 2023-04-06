@@ -13,6 +13,8 @@ source:
   - url: https://github.com/PennyLaneAI/pennylane-lightning/archive/refs/tags/v{{ version }}.tar.gz
     sha256: da9912f0286d1a54051cc19cf8bdbdcd732795636274c95f376db72a88e52d85
     folder: pennylane-lightning
+    patch:
+      - enable_blas.diff
 
 build:
   number: 1
@@ -82,7 +84,7 @@ outputs:
         - make
       host:
         - libblas
-        - liblapacke
+        - libcblas
         - libgomp      # [linux]
         - llvm-openmp  # [osx]
         - pip
