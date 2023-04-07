@@ -1,0 +1,16 @@
+diff --git a/setup.py b/setup.py
+index 91c6aa8..7122337 100644
+--- a/setup.py
++++ b/setup.py
+@@ -112,7 +112,10 @@ class CMakeBuild(build_ext):
+         if not Path(self.build_temp).exists():
+             os.makedirs(self.build_temp)
+ 
+-        subprocess.check_call(["cmake", str(ext.sourcedir)] + configure_args, cwd=self.build_temp)
++        subprocess.check_call(
++            ["cmake", "$CMAKE_ARGS", str(ext.sourcedir)] + configure_args,
++            cwd=self.build_temp,
++            env=os.environ)
+         subprocess.check_call(
+             ["cmake", "--build", ".", "--verbose"] + build_args, cwd=self.build_temp
+         )
