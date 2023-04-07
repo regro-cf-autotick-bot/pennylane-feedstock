@@ -1,5 +1,5 @@
 diff --git a/setup.py b/setup.py
-index 91c6aa8..8073d75 100644
+index 91c6aa8..9d05555 100644
 --- a/setup.py
 +++ b/setup.py
 @@ -85,11 +85,8 @@ class CMakeBuild(build_ext):
@@ -16,16 +16,7 @@ index 91c6aa8..8073d75 100644
              else:  # X64 arch
                  if shutil.which("brew"):
                      llvmpath = (
-@@ -102,8 +99,6 @@ class CMakeBuild(build_ext):
-                     f"-DCMAKE_CXX_COMPILER={llvmpath}/bin/clang++",
-                     f"-DCMAKE_LINKER={llvmpath}/bin/lld",
-                 ]  # Use clang instead of appleclang
--            # Disable OpenMP in M1 Macs
--            configure_args += [] if os.environ.get("USE_OMP") else ["-DENABLE_OPENMP=OFF"]
-         elif platform.system() == "Windows":
-             configure_args += ["-DENABLE_OPENMP=OFF", "-DENABLE_BLAS=OFF"]
-         elif platform.system() != "Linux":
-@@ -112,9 +107,15 @@ class CMakeBuild(build_ext):
+@@ -112,9 +109,15 @@ class CMakeBuild(build_ext):
          if not Path(self.build_temp).exists():
              os.makedirs(self.build_temp)
  
