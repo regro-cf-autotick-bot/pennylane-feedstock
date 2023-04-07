@@ -1,8 +1,17 @@
 diff --git a/setup.py b/setup.py
-index 91c6aa8..9d05555 100644
+index 91c6aa8..3879ef9 100644
 --- a/setup.py
 +++ b/setup.py
-@@ -85,11 +85,8 @@ class CMakeBuild(build_ext):
+@@ -54,8 +54,6 @@ class CMakeBuild(build_ext):
+         # Set Python_EXECUTABLE instead if you use PYBIND11_FINDPYTHON
+         configure_args = [
+             f"-DCMAKE_LIBRARY_OUTPUT_DIRECTORY={extdir}",
+-            f"-DPython_EXECUTABLE={sys.executable}",  # (Windows)
+-            f"-DPYTHON_EXECUTABLE={sys.executable}",  # (Ubuntu)
+             "-DENABLE_WARNINGS=OFF",  # Ignore warnings
+         ]
+ 
+@@ -85,11 +83,8 @@ class CMakeBuild(build_ext):
          if platform.system() == "Darwin":
              # To support ARM64
              if os.getenv("ARCHS") == "arm64":
@@ -16,21 +25,21 @@ index 91c6aa8..9d05555 100644
              else:  # X64 arch
                  if shutil.which("brew"):
                      llvmpath = (
-@@ -112,9 +109,15 @@ class CMakeBuild(build_ext):
+@@ -112,9 +107,15 @@ class CMakeBuild(build_ext):
          if not Path(self.build_temp).exists():
              os.makedirs(self.build_temp)
  
 -        subprocess.check_call(["cmake", str(ext.sourcedir)] + configure_args, cwd=self.build_temp)
++        print("f{configure_args=}")
++        print("f{build_args=}")
++        subprocess.check_call(
++            ["cmake"] + os.environ["CMAKE_ARGS"].split(" ") + [str(ext.sourcedir)] + configure_args,
++            cwd=self.build_temp, env=os.environ,
++        )
          subprocess.check_call(
 -            ["cmake", "--build", ".", "--verbose"] + build_args, cwd=self.build_temp
-+            ["cmake"] + os.environ["CMAKE_ARGS"].split(" ") + [str(ext.sourcedir)] + configure_args,
-+            cwd=self.build_temp,
-+            env=os.environ
-+        )
-+        subprocess.check_call(
-+            ["cmake"] + os.environ["CMAKE_ARGS"].split(" ") + ["--build", ".", "--verbose"] + build_args,
-+            cwd=self.build_temp,
-+            env=os.environ,
++            ["cmake", "--build", ".", "--verbose"] + build_args,
++            cwd=self.build_temp, env=os.environ,
          )
 
  
