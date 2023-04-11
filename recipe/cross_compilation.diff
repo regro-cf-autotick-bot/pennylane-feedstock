@@ -1,5 +1,5 @@
 diff --git a/setup.py b/setup.py
-index 91c6aa8..7ba2031 100644
+index 91c6aa8..ed8f374 100644
 --- a/setup.py
 +++ b/setup.py
 @@ -51,11 +51,8 @@ class CMakeBuild(build_ext):
@@ -14,34 +14,52 @@ index 91c6aa8..7ba2031 100644
              "-DENABLE_WARNINGS=OFF",  # Ignore warnings
          ]
  
-@@ -86,9 +83,9 @@ class CMakeBuild(build_ext):
-             # To support ARM64
-             if os.getenv("ARCHS") == "arm64":
-                 configure_args += [
+@@ -83,25 +80,11 @@ class CMakeBuild(build_ext):
+ 
+         # Add more platform dependent options
+         if platform.system() == "Darwin":
+-            # To support ARM64
+-            if os.getenv("ARCHS") == "arm64":
+-                configure_args += [
 -                    "-DCMAKE_CXX_COMPILER_TARGET=arm64-apple-macos11",
 -                    "-DCMAKE_SYSTEM_NAME=Darwin",
 -                    "-DCMAKE_SYSTEM_PROCESSOR=ARM64",
-+                    # this refers to the host Python, not build Python
-+                    f"-DPython3_EXECUTABLE=\"{os.environ['PYTHON']}\"",
-+                    f"-DPYTHON_EXECUTABLE=\"{os.environ['PYTHON']}\"",
-                 ]
-             else:  # X64 arch
-                 if shutil.which("brew"):
-@@ -112,9 +109,15 @@ class CMakeBuild(build_ext):
+-                ]
+-            else:  # X64 arch
+-                if shutil.which("brew"):
+-                    llvmpath = (
+-                        subprocess.check_output(["brew", "--prefix", "llvm"]).decode().strip()
+-                    )
+-                else:
+-                    llvmpath = shutil.which("clang++")
+-                    llvmpath = Path(llvmpath).parent.parent
+-                configure_args += [
+-                    f"-DCMAKE_CXX_COMPILER={llvmpath}/bin/clang++",
+-                    f"-DCMAKE_LINKER={llvmpath}/bin/lld",
+-                ]  # Use clang instead of appleclang
++            configure_args += [
++                # this refers to the host Python, not build Python
++                f"-DPython3_EXECUTABLE=\"{os.environ['PYTHON']}\"",
++                f"-DPYTHON_EXECUTABLE=\"{os.environ['PYTHON']}\"",
++            ]
+             # Disable OpenMP in M1 Macs
+             configure_args += [] if os.environ.get("USE_OMP") else ["-DENABLE_OPENMP=OFF"]
+         elif platform.system() == "Windows":
+@@ -112,9 +95,15 @@ class CMakeBuild(build_ext):
          if not Path(self.build_temp).exists():
              os.makedirs(self.build_temp)
  
 -        subprocess.check_call(["cmake", str(ext.sourcedir)] + configure_args, cwd=self.build_temp)
 +        print(f"{configure_args=}")
 +        print(f"{build_args=}")
-         subprocess.check_call(
--            ["cmake", "--build", ".", "--verbose"] + build_args, cwd=self.build_temp
++        subprocess.check_call(
 +            ["cmake"] + os.environ["CMAKE_ARGS"].split(" ") + [str(ext.sourcedir)] + configure_args,
 +            cwd=self.build_temp, env=os.environ,
 +        )
-+        subprocess.check_call(
+         subprocess.check_call(
+-            ["cmake", "--build", ".", "--verbose"] + build_args, cwd=self.build_temp
 +            ["cmake", "--build", ".", "--verbose"] + build_args,
 +            cwd=self.build_temp, env=os.environ,
          )
-
  
+
