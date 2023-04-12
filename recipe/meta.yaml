@@ -71,6 +71,8 @@ outputs:
       skip: true  # [win]
       run_exports:
         - {{ pin_subpackage('pennylane-lightning-core', max_pin='x.x.x') }}
+      script_env:
+        - USE_OMP=1  # [osx]
       script: cd "${SRC_DIR}/pennylane-lightning" && {{ PYTHON }} -m pip install . --no-deps -vv
     requirements:
       build:
