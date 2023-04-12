@@ -13,11 +13,12 @@ source:
   - url: https://github.com/PennyLaneAI/pennylane-lightning/archive/refs/tags/v{{ version }}.tar.gz
     sha256: da9912f0286d1a54051cc19cf8bdbdcd732795636274c95f376db72a88e52d85
     folder: pennylane-lightning
-    #patches:
+    patches:
+      - cross_compilation.diff  # [build_platform != target_platform]
     #  - enable_blas.diff
 
 build:
-  number: 2
+  number: 3
 
 requirements:
   host:
@@ -70,6 +71,8 @@ outputs:
       skip: true  # [win]
       run_exports:
         - {{ pin_subpackage('pennylane-lightning-core', max_pin='x.x.x') }}
+      # script_env:
+      #   - USE_OMP=1  # [osx]
       script: cd "${SRC_DIR}/pennylane-lightning" && {{ PYTHON }} -m pip install . --no-deps -vv
     requirements:
       build:
@@ -86,7 +89,7 @@ outputs:
         #- libblas
         #- libcblas
         - libgomp      # [linux]
-        - llvm-openmp  # [osx]
+        #- llvm-openmp <16.0.0  # [osx]
         - pip
         - pybind11
         - python
