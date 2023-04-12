@@ -78,7 +78,7 @@ outputs:
       build:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
-        - llvm-openmp ==15.0.7  # [osx]
+        - llvm-openmp ==14.0.6  # [osx]
         - python                                 # [build_platform != target_platform]
         - cross-python_{{ target_platform }}     # [build_platform != target_platform]
         - pybind11                               # [build_platform != target_platform]
@@ -90,7 +90,7 @@ outputs:
         #- libblas
         #- libcblas
         - libgomp      # [linux]
-        - llvm-openmp ==15.0.7  # [osx]
+        - llvm-openmp ==14.0.6  # [osx]
         - pip
         - pybind11
         - python
