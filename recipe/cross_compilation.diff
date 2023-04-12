@@ -1,5 +1,5 @@
 diff --git a/setup.py b/setup.py
-index 91c6aa8..ae8978a 100644
+index 91c6aa8..b801688 100644
 --- a/setup.py
 +++ b/setup.py
 @@ -51,11 +51,8 @@ class CMakeBuild(build_ext):
@@ -14,7 +14,7 @@ index 91c6aa8..ae8978a 100644
              "-DENABLE_WARNINGS=OFF",  # Ignore warnings
          ]
  
-@@ -83,27 +80,8 @@ class CMakeBuild(build_ext):
+@@ -83,25 +80,7 @@ class CMakeBuild(build_ext):
  
          # Add more platform dependent options
          if platform.system() == "Darwin":
@@ -37,14 +37,11 @@ index 91c6aa8..ae8978a 100644
 -                    f"-DCMAKE_CXX_COMPILER={llvmpath}/bin/clang++",
 -                    f"-DCMAKE_LINKER={llvmpath}/bin/lld",
 -                ]  # Use clang instead of appleclang
--            # Disable OpenMP in M1 Macs
--            configure_args += [] if os.environ.get("USE_OMP") else ["-DENABLE_OPENMP=OFF"]
-+            # Don't do anything, let conda-build handle it
-+            pass
++            # Don't do anything, let conda-build handle the config
+             # Disable OpenMP in M1 Macs
+             configure_args += [] if os.environ.get("USE_OMP") else ["-DENABLE_OPENMP=OFF"]
          elif platform.system() == "Windows":
-             configure_args += ["-DENABLE_OPENMP=OFF", "-DENABLE_BLAS=OFF"]
-         elif platform.system() != "Linux":
-@@ -112,9 +90,13 @@ class CMakeBuild(build_ext):
+@@ -112,9 +91,13 @@ class CMakeBuild(build_ext):
          if not Path(self.build_temp).exists():
              os.makedirs(self.build_temp)
  
