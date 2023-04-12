@@ -71,14 +71,14 @@ outputs:
       skip: true  # [win]
       run_exports:
         - {{ pin_subpackage('pennylane-lightning-core', max_pin='x.x.x') }}
-      # script_env:
-      #   - USE_OMP=1  # [osx]
+      script_env:
+        - USE_OMP=1  # [osx]
       script: cd "${SRC_DIR}/pennylane-lightning" && {{ PYTHON }} -m pip install . --no-deps -vv
     requirements:
       build:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
-        # - llvm-openmp  # [osx]
+        - llvm-openmp ==15.0.7  # [osx]
         - python                                 # [build_platform != target_platform]
         - cross-python_{{ target_platform }}     # [build_platform != target_platform]
         - pybind11                               # [build_platform != target_platform]
