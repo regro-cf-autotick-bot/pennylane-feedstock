@@ -90,7 +90,7 @@ outputs:
         #- libblas
         #- libcblas
         - libgomp      # [linux]
-        - llvm-openmp  # [osx]
+        - llvm-openmp ==15.0.7 # [osx]
         - pip
         - pybind11
         - python
