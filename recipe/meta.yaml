@@ -18,7 +18,7 @@ source:
     #  - enable_blas.diff
 
 build:
-  number: 3
+  number: 4
 
 requirements:
   host:
@@ -75,10 +75,10 @@ outputs:
       #   - USE_OMP=1  # [osx]
       # script: cd "${SRC_DIR}/pennylane-lightning" && {{ PYTHON }} -m pip install . --no-deps -vv
       script: |
-        cd "${SRC_DIR}/pennylane-lightning" 
-        && {{ PYTHON }} setup.py build_ext --define="ENABLE_BLAS=ON" 
-        && {{ PYTHON }} setup.py bdist_wheel 
-        && {{ PYTHON }} -m pip install . --no-deps -vv
+        cd "${SRC_DIR}/pennylane-lightning"
+        {{ PYTHON }} setup.py build_ext --define="ENABLE_BLAS=ON"
+        {{ PYTHON }} setup.py bdist_wheel
+        {{ PYTHON }} -m pip install . --no-deps -vv
 
     requirements:
       build:
