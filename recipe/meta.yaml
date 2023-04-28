@@ -89,9 +89,9 @@ outputs:
         #- libblas
         #- libcblas
         - libgomp      # [linux]
-        - llvm-openmp <15.0.0  # [osx]
-        - kokkos <4.0.0
-        - kokkos-kernels <4.0.0
+        - llvm-openmp  # [osx]
+        - kokkos
+        - kokkos-kernels
         - pip
         - pybind11
         - python
