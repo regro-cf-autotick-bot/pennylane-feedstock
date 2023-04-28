@@ -91,10 +91,10 @@ outputs:
         - make
       host:
         - libblas
-        - libgomp      # [linux]
-        - llvm-openmp  # [osx]
-        - kokkos
-        - kokkos-kernels
+        - libgomp               # [linux]
+        - llvm-openmp ==16.0.1  # [osx]
+        - kokkos ==3.7.01
+        - kokkos-kernels ==3.7.01
         - pip
         - pybind11
         - python
