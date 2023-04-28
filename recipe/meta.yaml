@@ -10,8 +10,10 @@ source:
   - url: https://github.com/PennyLaneAI/pennylane/archive/refs/tags/v{{ version }}.tar.gz
     sha256: e59e042174abd8f1596034d3f4dd113b24d06e4aadb5f2e5828fa3411fabf0df
     folder: pennylane
-  - url: https://github.com/PennyLaneAI/pennylane-lightning/archive/refs/tags/v{{ version }}.tar.gz
-    sha256: da9912f0286d1a54051cc19cf8bdbdcd732795636274c95f376db72a88e52d85
+  # - url: https://github.com/PennyLaneAI/pennylane-lightning/archive/refs/tags/v{{ version }}.tar.gz
+  #   sha256: da9912f0286d1a54051cc19cf8bdbdcd732795636274c95f376db72a88e52d85
+  - git_url: https://github.com/PennyLaneAI/pennylane-lightning.git
+    git_tag: f0e8745b2f4b1fbe6681d175ce418597e68959fe
     folder: pennylane-lightning
     patches:
       - cross_compilation.diff  # [build_platform != target_platform]
