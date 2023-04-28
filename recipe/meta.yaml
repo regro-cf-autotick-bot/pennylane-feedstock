@@ -15,7 +15,6 @@ source:
     folder: pennylane-lightning
     patches:
       - cross_compilation.diff  # [build_platform != target_platform]
-    #  - enable_blas.diff
 
 build:
   number: 4
@@ -73,7 +72,12 @@ outputs:
         - {{ pin_subpackage('pennylane-lightning-core', max_pin='x.x.x') }}
       script_env:
         - USE_OMP=1  # [osx]
-      script: cd "${SRC_DIR}/pennylane-lightning" && {{ PYTHON }} -m pip install . --no-deps -vv
+      script: |
+        cd "${SRC_DIR}/pennylane-lightning"
+        {{ PYTHON }} setup.py build_ext --define="ENABLE_BLAS=ON"
+        {{ PYTHON }} setup.py bdist_wheel
+        {{ PYTHON }} -m pip install . --no-deps -vv
+
     requirements:
       build:
         - {{ compiler('c') }}
@@ -86,8 +90,7 @@ outputs:
         - ninja
         - make
       host:
-        #- libblas
-        #- libcblas
+        - libblas
         - libgomp      # [linux]
         - llvm-openmp  # [osx]
         - kokkos
