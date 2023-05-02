@@ -14,6 +14,7 @@ source:
     sha256: 0f4032409d20d00991b5d14fe0b2b928baca4a13c5a1b16eab91f61f9273e58d
     folder: pennylane-lightning
     patches:
+      - allocator.diff          # [osx]
       - cross_compilation.diff  # [build_platform != target_platform]
 
 build:
