@@ -52,7 +52,7 @@ outputs:
         - opt_einsum
         - python
         - requests
-        - retworkx
+        - rustworkx
         - scipy
         - semantic_version >=2.10
         - toml
