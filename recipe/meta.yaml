@@ -1,5 +1,5 @@
 {% set name = "pennylane" %}
-{% set version = "0.29.0" %}
+{% set version = "0.30.0" %}
 
 
 package:
@@ -8,18 +8,17 @@ package:
 
 source:
   - url: https://github.com/PennyLaneAI/pennylane/archive/refs/tags/v{{ version }}.tar.gz
-    sha256: e59e042174abd8f1596034d3f4dd113b24d06e4aadb5f2e5828fa3411fabf0df
+    sha256: 7fe4821fbc733e3e40d7011e054bd2e31edde3151fd9539025c827a5a3579d6b
     folder: pennylane
-  # - url: https://github.com/PennyLaneAI/pennylane-lightning/archive/refs/tags/v{{ version }}.tar.gz
-  #   sha256: da9912f0286d1a54051cc19cf8bdbdcd732795636274c95f376db72a88e52d85
-  - git_url: https://github.com/PennyLaneAI/pennylane-lightning.git
-    git_tag: f0e8745b2f4b1fbe6681d175ce418597e68959fe
+  - url: https://github.com/PennyLaneAI/pennylane-lightning/archive/refs/tags/v{{ version }}.tar.gz
+    sha256: 0f4032409d20d00991b5d14fe0b2b928baca4a13c5a1b16eab91f61f9273e58d
     folder: pennylane-lightning
     patches:
+      - allocator.diff          # [osx]
       - cross_compilation.diff  # [build_platform != target_platform]
 
 build:
-  number: 4
+  number: 1
 
 requirements:
   host:
@@ -54,12 +53,12 @@ outputs:
         - opt_einsum
         - python
         - requests
-        - retworkx
+        - rustworkx
         - scipy
         - semantic_version >=2.10
         - toml
       run_constrained:
-        - pennylane >=0.29.0
+        - pennylane >=0.30.0
     test:
       imports:
         - pennylane
