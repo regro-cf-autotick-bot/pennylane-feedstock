@@ -92,6 +92,7 @@ outputs:
         - make
       host:
         - libblas
+        - libcblas
         - libgomp      # [linux]
         - llvm-openmp  # [osx]
         - kokkos ==3.7.01
