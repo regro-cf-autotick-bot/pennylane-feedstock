@@ -18,7 +18,7 @@ source:
       - cross_compilation.diff  # [build_platform != target_platform]
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   host:
@@ -71,9 +71,8 @@ outputs:
       skip: true  # [win]
       run_exports:
         - {{ pin_subpackage('pennylane-lightning-core', max_pin='x.x.x') }}
-      # script_env:
-      #   - USE_OMP=1  # [osx]
-      # script: cd "${SRC_DIR}/pennylane-lightning" && {{ PYTHON }} -m pip install . --no-deps -vv
+      script_env:
+        - USE_OMP=1  # [osx]
       script: |
         cd "${SRC_DIR}/pennylane-lightning"
         {{ PYTHON }} setup.py build_ext --define="ENABLE_BLAS=ON"
@@ -92,9 +91,11 @@ outputs:
         - ninja
         - make
       host:
-        - libblas
+        - libcblas
         - libgomp      # [linux]
-        #- llvm-openmp <16.0.0  # [osx]
+        - llvm-openmp  # [osx]
+        - kokkos ==3.7.01
+        - kokkos-kernels ==3.7.01
         - pip
         - pybind11
         - python
