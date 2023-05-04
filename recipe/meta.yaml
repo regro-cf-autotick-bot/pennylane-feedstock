@@ -91,7 +91,6 @@ outputs:
         - ninja
         - make
       host:
-        - libblas
         - libcblas
         - libgomp      # [linux]
         - llvm-openmp  # [osx]
