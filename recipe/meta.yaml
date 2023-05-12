@@ -95,8 +95,8 @@ outputs:
         - libcblas
         - libgomp      # [linux]
         - llvm-openmp  # [osx]
-        - kokkos ==3.7.01
-        - kokkos-kernels ==3.7.01
+        - kokkos
+        - kokkos-kernels
         - pip
         - pybind11
         - python
