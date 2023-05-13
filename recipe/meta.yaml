@@ -15,6 +15,7 @@ source:
     folder: pennylane-lightning
     patches:
       - cblas.patch
+      - kokkos_sparse.patch
       - allocator.diff          # [osx]
       - cross_compilation.diff  # [build_platform != target_platform]
 
