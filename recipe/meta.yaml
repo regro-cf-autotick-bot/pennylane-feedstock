@@ -14,6 +14,8 @@ source:
     sha256: 0f4032409d20d00991b5d14fe0b2b928baca4a13c5a1b16eab91f61f9273e58d
     folder: pennylane-lightning
     patches:
+      - cblas.patch
+      - kokkos_sparse.patch
       - allocator.diff          # [osx]
       - cross_compilation.diff  # [build_platform != target_platform]
 
@@ -92,10 +94,10 @@ outputs:
         - make
       host:
         - libcblas
-        - libgomp      # [linux]
-        - llvm-openmp  # [osx]
-        - kokkos ==3.7.01
-        - kokkos-kernels ==3.7.01
+        - libgomp               # [linux]
+        - llvm-openmp >=16.0.3  # [osx]
+        - kokkos >=4.0.00
+        - kokkos-kernels >=4.0.00
         - pip
         - pybind11
         - python
