@@ -20,7 +20,7 @@ source:
       - cross_compilation.diff  # [build_platform != target_platform]
 
 build:
-  number: 4
+  number: 5
 
 requirements:
   host:
