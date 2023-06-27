@@ -108,6 +108,8 @@ outputs:
         - numpy
         - python
         - {{ pin_subpackage('pennylane-core') }}
+        - {{ pin_compatible('kokkos', min_pin='x.x.x', max_pin='x.x.x') }}
+        - {{ pin_compatible('kokkos-kernels', min_pin='x.x.x', max_pin='x.x.x') }}
       run_constrained:
         - pennylane-lightning <0.0a0
     test:
