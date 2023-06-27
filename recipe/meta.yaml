@@ -1,5 +1,5 @@
 {% set name = "pennylane" %}
-{% set version = "0.30.0" %}
+{% set version = "0.31.0" %}
 
 
 package:
@@ -8,19 +8,19 @@ package:
 
 source:
   - url: https://github.com/PennyLaneAI/pennylane/archive/refs/tags/v{{ version }}.tar.gz
-    sha256: 7fe4821fbc733e3e40d7011e054bd2e31edde3151fd9539025c827a5a3579d6b
+    sha256: f3b68700825c120e44434ed2b2ab71d0be9d3111f3043077ec0598661ec33477
     folder: pennylane
   - url: https://github.com/PennyLaneAI/pennylane-lightning/archive/refs/tags/v{{ version }}.tar.gz
-    sha256: 0f4032409d20d00991b5d14fe0b2b928baca4a13c5a1b16eab91f61f9273e58d
+    sha256: b177243625b6fdac0699d163bbc330c92ca87fb9f427643785069273d2a255f6
     folder: pennylane-lightning
-    patches:
-      - cblas.patch
-      - kokkos_sparse.patch
-      - allocator.diff          # [osx]
-      - cross_compilation.diff  # [build_platform != target_platform]
+    # patches:
+    #   - cblas.patch
+    #   - kokkos_sparse.patch
+    #   - allocator.diff          # [osx]
+    #   - cross_compilation.diff  # [build_platform != target_platform]
 
 build:
-  number: 5
+  number: 0
 
 requirements:
   host:
@@ -45,7 +45,7 @@ outputs:
         - python
       run:
         - appdirs
-        - autograd
+        - autograd >=1.4,<1.6
         - autoray ==0.3.1
         - cachetools
         - cvxopt
