@@ -97,7 +97,7 @@ outputs:
         - libgomp               # [linux]
         - llvm-openmp >=16.0.3  # [osx]
         - kokkos >=3.7.0,<4
-        - kokkos-kernels >=3.7.0,<4
+        - kokkos-kernels >=3.7.0,<3.7.2
         - pip
         - pybind11
         - python
