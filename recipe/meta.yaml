@@ -13,6 +13,8 @@ source:
   - url: https://github.com/PennyLaneAI/pennylane-lightning/archive/refs/tags/v{{ version }}.tar.gz
     sha256: b177243625b6fdac0699d163bbc330c92ca87fb9f427643785069273d2a255f6
     folder: pennylane-lightning
+    patches:
+      - 0001-osx-openmp.patch
 
 build:
   number: 1
