@@ -73,7 +73,7 @@ outputs:
       script:
         - cd "${SRC_DIR}/pennylane-lightning"
         - {{ PYTHON }} setup.py build_ext --define="ENABLE_BLAS=ON;ENABLE_OPENMP=ON"  # [not osx or build_platform == target_platform]
-        - {{ PYTHON }} setup.py build_ext --define="ENABLE_BLAS=ON;ENABLE_OPENMP=OFF;ENABLE_KOKKOS=OFF;CMAKE_CXX_COMPILER_TARGET=arm64-apple-macos11;CMAKE_SYSTEM_NAME=Darwin;CMAKE_SYSTEM_PROCESSOR=ARM64"  # [osx and build_platform != target_platform]
+        - {{ PYTHON }} setup.py build_ext --define="ENABLE_BLAS=ON;ENABLE_OPENMP=ON;ENABLE_KOKKOS=OFF;CMAKE_CXX_COMPILER_TARGET=arm64-apple-macos11;CMAKE_SYSTEM_NAME=Darwin;CMAKE_SYSTEM_PROCESSOR=ARM64"  # [osx and build_platform != target_platform]
         - {{ PYTHON }} setup.py bdist_wheel
         - {{ PYTHON }} -m pip install . --no-deps -vv
 
@@ -90,10 +90,10 @@ outputs:
         - make
       host:
         - libcblas
-        - libgomp               # [linux]
-        - llvm-openmp >=16.0.3  # [osx]
-        - kokkos >=4.0.0,<5
-        - kokkos-kernels >=4.0.0,<5
+        - libgomp                    # [linux]
+        - llvm-openmp >=16.0.3       # [osx]
+        - kokkos >=4.0.0,<5          # [not osx or build_platform == target_platform]
+        - kokkos-kernels >=4.0.0,<5  # [not osx or build_platform == target_platform]
         - pip
         - pybind11
         - python
@@ -104,8 +104,8 @@ outputs:
         - numpy
         - python
         - {{ pin_subpackage('pennylane-core') }}
-        - {{ pin_compatible('kokkos', min_pin='x.x.x', max_pin='x.x.x') }}
-        - {{ pin_compatible('kokkos-kernels', min_pin='x.x.x', max_pin='x.x.x') }}
+        - {{ pin_compatible('kokkos', min_pin='x.x.x', max_pin='x.x.x') }}          # [not osx or build_platform == target_platform]
+        - {{ pin_compatible('kokkos-kernels', min_pin='x.x.x', max_pin='x.x.x') }}  # [not osx or build_platform == target_platform]
       run_constrained:
         - pennylane-lightning <0.0a0
     test:
@@ -116,7 +116,6 @@ outputs:
         - pip
 
   - name: pennylane
-    # version: {{ version }}
     build:
       skip: true  # [win]
     requirements:
