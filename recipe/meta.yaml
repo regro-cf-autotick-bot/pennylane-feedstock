@@ -1,6 +1,6 @@
 {% set name = "pennylane" %}
 {% set version = "0.32.0" %}
-
+{% set build_num = 0 %}
 
 package:
   name: pennylane-suite
@@ -15,7 +15,7 @@ source:
     folder: pennylane-lightning
 
 build:
-  number: 0
+  number: {{ build_num }}
 
 requirements:
   host:
@@ -25,6 +25,7 @@ requirements:
 outputs:
   - name: pennylane-core
     build:
+      number: {{ build_num }}
       skip: true  # [win]
       run_exports:
         - {{ pin_subpackage('pennylane-core', max_pin='x.x.x') }}
@@ -65,6 +66,7 @@ outputs:
 
   - name: pennylane-lightning-core
     build:
+      number: {{ build_num }}
       skip: true  # [win]
       run_exports:
         - {{ pin_subpackage('pennylane-lightning-core', max_pin='x.x.x') }}
@@ -111,6 +113,7 @@ outputs:
 
   - name: pennylane
     build:
+      number: {{ build_num }}
       skip: true  # [win]
     requirements:
       host:
