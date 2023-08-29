@@ -1,6 +1,6 @@
 {% set name = "pennylane" %}
-{% set version = "0.31.0" %}
-
+{% set version = "0.32.0" %}
+{% set build_num = 0 %}
 
 package:
   name: pennylane-suite
@@ -8,14 +8,14 @@ package:
 
 source:
   - url: https://github.com/PennyLaneAI/pennylane/archive/refs/tags/v{{ version }}.tar.gz
-    sha256: f3b68700825c120e44434ed2b2ab71d0be9d3111f3043077ec0598661ec33477
+    sha256: 8a2206268d7cae0a59f9067b6075175eec93f4843519b371f02716c49a22e750
     folder: pennylane
   - url: https://github.com/PennyLaneAI/pennylane-lightning/archive/refs/tags/v{{ version }}.tar.gz
-    sha256: b177243625b6fdac0699d163bbc330c92ca87fb9f427643785069273d2a255f6
+    sha256: 124edae1828c7e72e7b3bfbb0e75e98a07a490d7f1eab19eebb3311bfa8a23d4
     folder: pennylane-lightning
 
 build:
-  number: 1
+  number: {{ build_num }}
 
 requirements:
   host:
@@ -25,6 +25,7 @@ requirements:
 outputs:
   - name: pennylane-core
     build:
+      number: {{ build_num }}
       skip: true  # [win]
       run_exports:
         - {{ pin_subpackage('pennylane-core', max_pin='x.x.x') }}
@@ -65,13 +66,14 @@ outputs:
 
   - name: pennylane-lightning-core
     build:
+      number: {{ build_num }}
       skip: true  # [win]
       run_exports:
         - {{ pin_subpackage('pennylane-lightning-core', max_pin='x.x.x') }}
       script:
         - cd "${SRC_DIR}/pennylane-lightning"
         - {{ PYTHON }} setup.py build_ext --define="ENABLE_BLAS=ON;ENABLE_OPENMP=ON"  # [not osx or build_platform == target_platform]
-        - {{ PYTHON }} setup.py build_ext --define="ENABLE_BLAS=ON;ENABLE_OPENMP=ON;ENABLE_KOKKOS=ON;CMAKE_CXX_COMPILER_TARGET=arm64-apple-macos11;CMAKE_SYSTEM_NAME=Darwin;CMAKE_SYSTEM_PROCESSOR=ARM64"  # [osx and build_platform != target_platform]
+        - {{ PYTHON }} setup.py build_ext --define="ENABLE_BLAS=ON;ENABLE_OPENMP=ON;CMAKE_CXX_COMPILER_TARGET=arm64-apple-macos11;CMAKE_SYSTEM_NAME=Darwin;CMAKE_SYSTEM_PROCESSOR=ARM64"  # [osx and build_platform != target_platform]
         - {{ PYTHON }} setup.py bdist_wheel
         - {{ PYTHON }} -m pip install . --no-deps -vv
 
@@ -90,8 +92,6 @@ outputs:
         - libcblas
         - libgomp               # [linux]
         - llvm-openmp >=16.0.3  # [osx]
-        - kokkos >=4.0.0,<5
-        - kokkos-kernels >=4.0.0,<5
         - pip
         - pybind11
         - python
@@ -102,8 +102,6 @@ outputs:
         - numpy
         - python
         - {{ pin_subpackage('pennylane-core') }}
-        - {{ pin_compatible('kokkos', min_pin='x.x.x', max_pin='x.x.x') }}
-        - {{ pin_compatible('kokkos-kernels', min_pin='x.x.x', max_pin='x.x.x') }}
       run_constrained:
         - pennylane-lightning <0.0a0
     test:
@@ -115,6 +113,7 @@ outputs:
 
   - name: pennylane
     build:
+      number: {{ build_num }}
       skip: true  # [win]
     requirements:
       host:
