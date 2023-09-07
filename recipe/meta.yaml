@@ -128,7 +128,6 @@ outputs:
         - pennylane
         - pennylane_lightning
       commands:
-        - pypy -c "import pennylane as qml; qml.about()"  # [python_impl == pypy]
         - python -c "import pennylane as qml; qml.about()"
         - pip check
         - pl-device-test --help
