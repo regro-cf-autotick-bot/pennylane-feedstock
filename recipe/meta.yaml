@@ -10,6 +10,8 @@ source:
   - url: https://github.com/PennyLaneAI/pennylane/archive/refs/tags/v{{ version }}.tar.gz
     sha256: f3b68700825c120e44434ed2b2ab71d0be9d3111f3043077ec0598661ec33477
     folder: pennylane
+    patches:
+      - 0001-setup.patch
   - url: https://github.com/PennyLaneAI/pennylane-lightning/archive/refs/tags/v{{ version }}.tar.gz
     sha256: b177243625b6fdac0699d163bbc330c92ca87fb9f427643785069273d2a255f6
     folder: pennylane-lightning
@@ -52,7 +54,7 @@ outputs:
         - python
         - requests
         - rustworkx
-        - scipy <=1.10
+        - scipy
         - semantic_version >=2.7
         - toml
       run_constrained:
