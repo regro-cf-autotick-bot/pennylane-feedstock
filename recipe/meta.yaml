@@ -10,8 +10,6 @@ source:
   - url: https://github.com/PennyLaneAI/pennylane/archive/refs/tags/v{{ version }}.tar.gz
     sha256: b41c843a432c5869fc63dc35c9e9d53bec64d296ca0e0eeb1c9b83d95a68c3f1
     folder: pennylane
-    patches:
-      - 0001-setup.patch
   - url: https://github.com/PennyLaneAI/pennylane-lightning/archive/refs/tags/v{{ version }}.tar.gz
     sha256: c4cab4a8a1a53edc0990a2a429805dca1c6a46a7ffcc6f77c985b88cd6ff6247
     folder: pennylane-lightning
