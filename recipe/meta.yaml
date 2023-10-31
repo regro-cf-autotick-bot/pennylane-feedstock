@@ -41,13 +41,13 @@ outputs:
         - python
       run:
         - appdirs
-        - autograd >=1.4,<1.6
-        - autoray ==0.3.1
+        - autograd
+        - autoray >=0.6.1
         - cachetools
         - cvxopt
         - cvxpy
         - networkx
-        - numpy <1.24
+        - numpy
         - opt_einsum
         - python
         - requests
@@ -55,6 +55,7 @@ outputs:
         - scipy
         - semantic_version >=2.7
         - toml
+        - typing_extensions
       run_constrained:
         - pennylane >=0.30.0
     test:
