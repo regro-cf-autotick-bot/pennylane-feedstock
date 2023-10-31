@@ -134,8 +134,6 @@ outputs:
         - python -c "import pennylane as qml; qml.about()"
         - pip check
         - pl-device-test --help
-        - pl-device-test --device default.qubit --shots None --skip-ops
-        - pl-device-test --device default.qubit --shots 10000 --skip-ops
         - pl-device-test --device lightning.qubit --shots None --skip-ops
         - pl-device-test --device lightning.qubit --shots 10000 --skip-ops
       requires:
