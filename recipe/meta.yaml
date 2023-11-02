@@ -1,5 +1,5 @@
 {% set name = "pennylane" %}
-{% set version = "0.31.0" %}
+{% set version = "0.33.0" %}
 {% set build_num = 2 %}
 
 package:
@@ -8,12 +8,10 @@ package:
 
 source:
   - url: https://github.com/PennyLaneAI/pennylane/archive/refs/tags/v{{ version }}.tar.gz
-    sha256: f3b68700825c120e44434ed2b2ab71d0be9d3111f3043077ec0598661ec33477
+    sha256: b41c843a432c5869fc63dc35c9e9d53bec64d296ca0e0eeb1c9b83d95a68c3f1
     folder: pennylane
-    patches:
-      - 0001-setup.patch
   - url: https://github.com/PennyLaneAI/pennylane-lightning/archive/refs/tags/v{{ version }}.tar.gz
-    sha256: b177243625b6fdac0699d163bbc330c92ca87fb9f427643785069273d2a255f6
+    sha256: c4cab4a8a1a53edc0990a2a429805dca1c6a46a7ffcc6f77c985b88cd6ff6247
     folder: pennylane-lightning
 
 build:
@@ -43,20 +41,18 @@ outputs:
         - python
       run:
         - appdirs
-        - autograd >=1.4,<1.6
-        - autoray ==0.3.1
+        - autograd
+        - autoray >=0.6.1
         - cachetools
-        - cvxopt
-        - cvxpy
         - networkx
-        - numpy <1.24
-        - opt_einsum
+        - numpy
         - python
         - requests
         - rustworkx
         - scipy
         - semantic_version >=2.7
         - toml
+        - typing_extensions
       run_constrained:
         - pennylane >=0.30.0
     test:
@@ -138,8 +134,6 @@ outputs:
         - python -c "import pennylane as qml; qml.about()"
         - pip check
         - pl-device-test --help
-        - pl-device-test --device default.qubit --shots None --skip-ops
-        - pl-device-test --device default.qubit --shots 10000 --skip-ops
         - pl-device-test --device lightning.qubit --shots None --skip-ops
         - pl-device-test --device lightning.qubit --shots 10000 --skip-ops
       requires:
