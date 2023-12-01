@@ -91,7 +91,6 @@ outputs:
         - libgomp               # [linux]
         - llvm-openmp >=16.0.3  # [osx]
         - kokkos >=4.0.0,<5
-        - kokkos-kernels >=4.0.0,<5
         - pip
         - pybind11
         - python
@@ -103,7 +102,6 @@ outputs:
         - python
         - {{ pin_subpackage('pennylane-core') }}
         - {{ pin_compatible('kokkos', min_pin='x.x.x', max_pin='x.x.x') }}
-        - {{ pin_compatible('kokkos-kernels', min_pin='x.x.x', max_pin='x.x.x') }}
       run_constrained:
         - pennylane-lightning <0.0a0
     test:
