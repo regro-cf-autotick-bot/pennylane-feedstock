@@ -71,9 +71,7 @@ outputs:
       script:
         - cd "${SRC_DIR}/pennylane-lightning"
         - CMAKE_ARGS="-DENABLE_BLAS=ON -DENABLE_OPENMP=ON -DCMAKE_CXX_COMPILER_TARGET=arm64-apple-macos11 -DCMAKE_SYSTEM_NAME=Darwin -DCMAKE_SYSTEM_PROCESSOR=ARM64" {{ PYTHON }} -m pip install . --no-deps -vv  # [osx and build_platform != target_platform]
-        - {{ PYTHON }} setup.py build_ext --define="ENABLE_BLAS=ON;ENABLE_OPENMP=ON"  # [not osx or build_platform == target_platform]
-        - {{ PYTHON }} setup.py bdist_wheel  # [not osx or build_platform == target_platform]
-        - {{ PYTHON }} -m pip install . --no-deps -vv  # [not osx or build_platform == target_platform]
+        - CMAKE_ARGS="-DENABLE_BLAS=ON -DENABLE_OPENMP=ON" {{ PYTHON }} -m pip install . --no-deps -vv  # [not osx or build_platform == target_platform]
 
     requirements:
       build:
