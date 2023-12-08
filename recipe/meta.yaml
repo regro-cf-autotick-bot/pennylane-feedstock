@@ -81,7 +81,6 @@ outputs:
 
     requirements:
       build:
-        - {{ compiler('c') }}
         - {{ compiler('cxx') }}
         - python                                 # [build_platform != target_platform]
         - cross-python_{{ target_platform }}     # [build_platform != target_platform]
@@ -107,7 +106,6 @@ outputs:
       imports:
         - pennylane_lightning
         - pennylane_lightning.lightning_qubit
-        - pennylane_lightning.lightning_qubit_ops
       requires:
         - pip
         - setuptools
