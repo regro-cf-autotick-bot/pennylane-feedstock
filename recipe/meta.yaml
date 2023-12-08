@@ -24,6 +24,7 @@ requirements:
 
 outputs:
   - name: pennylane-core
+    version: {{ version }}
     build:
       number: {{ build_num }}
       skip: true  # [win]
@@ -61,10 +62,11 @@ outputs:
       imports:
         - pennylane
       requires:
-        - setuptools
         - pip
+        - setuptools
 
   - name: pennylane-lightning-core
+    version: {{ version }}
     build:
       number: {{ build_num }}
       skip: true  # [win]
@@ -98,20 +100,20 @@ outputs:
         - setuptools
         - ninja
       run:
-        - ninja
-        - numpy
-        - python
         - {{ pin_subpackage('pennylane-core') }}
       run_constrained:
         - pennylane-lightning <0.0a0
     test:
       imports:
         - pennylane_lightning
+        - pennylane_lightning.lightning_qubit
+        - pennylane_lightning.lightning_qubit_ops
       requires:
-        - setuptools
         - pip
+        - setuptools
 
   - name: pennylane
+    version: {{ version }}
     build:
       number: {{ build_num }}
       skip: true  # [win]
@@ -126,6 +128,8 @@ outputs:
       imports:
         - pennylane
         - pennylane_lightning
+        - pennylane_lightning.lightning_qubit
+        - pennylane_lightning.lightning_qubit_ops
       commands:
         - pypy --version 2> /dev/null || echo Using Python to run tests
         - pypy -c "import pennylane as qml; qml.about()" 2> /dev/null || echo PyPy not found
@@ -133,13 +137,13 @@ outputs:
         - pip check
         - pl-device-test --help
         - pl-device-test --device lightning.qubit --shots None --skip-ops
-        - pl-device-test --device lightning.qubit --shots 10000 --skip-ops
+        - pl-device-test --device lightning.qubit --shots 100000 --skip-ops
       requires:
-        - setuptools
         - flaky
         - pip
         - pytest
         - pytest-mock
+        - setuptools
 
 about:
   home: https://github.com/PennyLaneAI/pennylane
