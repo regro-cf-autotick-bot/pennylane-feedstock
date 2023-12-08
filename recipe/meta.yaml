@@ -106,6 +106,7 @@ outputs:
       imports:
         - pennylane_lightning
         - pennylane_lightning.lightning_qubit
+        - pennylane_lightning.lightning_qubit_ops  # [build_platform == target_platform]
       requires:
         - pip
         - setuptools
@@ -127,7 +128,7 @@ outputs:
         - pennylane
         - pennylane_lightning
         - pennylane_lightning.lightning_qubit
-        - pennylane_lightning.lightning_qubit_ops
+        - pennylane_lightning.lightning_qubit_ops  # [build_platform == target_platform]
       commands:
         - pypy --version 2> /dev/null || echo Using Python to run tests
         - pypy -c "import pennylane as qml; qml.about()" 2> /dev/null || echo PyPy not found
