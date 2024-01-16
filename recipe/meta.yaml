@@ -20,7 +20,9 @@ build:
 requirements:
   host:
     - pip
-    - python
+    - python >=3.9,<4
+  run:
+    - python >=3.9,<4
 
 outputs:
   - name: pennylane-core

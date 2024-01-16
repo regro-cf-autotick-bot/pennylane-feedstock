@@ -1,6 +1,2 @@
-python:
-  - 3.9.* *_cpython
-  - 3.10.* *_cpython
-  - 3.11.* *_cpython
-  - 3.12.* *_cpython
-  
+MACOSX_SDK_VERSION:        # [osx]
+  - "10.15"                # [osx and x86_64]
