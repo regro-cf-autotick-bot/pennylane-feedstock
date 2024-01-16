@@ -16,13 +16,12 @@ source:
 
 build:
   number: {{ build_num }}
+  skip: true  # [py==38]
 
 requirements:
   host:
     - pip
-    - python >=3.9,<4
-  run:
-    - python >=3.9,<4
+    - python
 
 outputs:
   - name: pennylane-core
