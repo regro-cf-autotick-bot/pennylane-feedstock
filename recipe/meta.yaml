@@ -141,6 +141,7 @@ outputs:
         - flaky
         - pip
         - pytest
+        - pytest-benchmark
         - pytest-mock
 
 about:
