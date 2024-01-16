@@ -1,5 +1,5 @@
 {% set name = "pennylane" %}
-{% set version = "0.33.1" %}
+{% set version = "0.34.0" %}
 {% set build_num = 2 %}
 
 package:
@@ -8,14 +8,15 @@ package:
 
 source:
   - url: https://github.com/PennyLaneAI/pennylane/archive/refs/tags/v{{ version }}.tar.gz
-    sha256: 89d02bfe3a37abd13dcdb2f34f00a38e9e60a13af66a97911c8558f77ff4e32e
+    sha256: f76f544212c028a8f882ce7f66639e7f7c4c9213277bde0454c7f3a7d9d46538
     folder: pennylane
   - url: https://github.com/PennyLaneAI/pennylane-lightning/archive/refs/tags/v{{ version }}.tar.gz
-    sha256: 878f63cd1afadd52386b1aca9c0e3fb0a097b64ce8e347b325ebc7cac722e5e0
+    sha256: 398c3a1d4450a9f3e146204c22329da9adc3f83a1685ae69187f3b25f47824c0
     folder: pennylane-lightning
 
 build:
   number: {{ build_num }}
+  skip: true  # [py==38]
 
 requirements:
   host:
@@ -141,6 +142,7 @@ outputs:
         - flaky
         - pip
         - pytest
+        - pytest-benchmark
         - pytest-mock
 
 about:
