@@ -1,5 +1,5 @@
 {% set name = "pennylane" %}
-{% set version = "0.34.0" %}
+{% set version = "0.35.0" %}
 {% set build_num = 3 %}
 
 package:
@@ -8,10 +8,10 @@ package:
 
 source:
   - url: https://github.com/PennyLaneAI/pennylane/archive/refs/tags/v{{ version }}.tar.gz
-    sha256: f76f544212c028a8f882ce7f66639e7f7c4c9213277bde0454c7f3a7d9d46538
+    sha256: 3b99185661e8a0d0f7bc2dcc9cfa51dde20e99708c3c7d858c4732f0eb774716
     folder: pennylane
   - url: https://github.com/PennyLaneAI/pennylane-lightning/archive/refs/tags/v{{ version }}.tar.gz
-    sha256: 398c3a1d4450a9f3e146204c22329da9adc3f83a1685ae69187f3b25f47824c0
+    sha256: 1a16fd3dbf03788e4f8dd510bbb668e7a7073ca62be4d9414e2c32e0166e8bda
     folder: pennylane-lightning
 
 build:
@@ -33,8 +33,8 @@ outputs:
         - {{ pin_subpackage('pennylane-core', max_pin='x.x.x') }}
       entry_points:
         - pl-device-test=pennylane.devices.tests:cli
-      script: 
-        - cd "${SRC_DIR}/pennylane" 
+      script:
+        - cd "${SRC_DIR}/pennylane"
         - {{ PYTHON }} -m pip install . --no-deps -vv
     requirements:
       build:
