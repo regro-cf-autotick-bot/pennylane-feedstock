@@ -1,6 +1,6 @@
 {% set name = "pennylane" %}
 {% set version = "0.35.1" %}
-{% set build_num = 3 %}
+{% set build_num = 0 %}
 
 package:
   name: pennylane-suite
@@ -139,7 +139,7 @@ outputs:
       requires:
         - flaky
         - pip
-        - pytest
+        - pytest <8.1
         - pytest-benchmark
         - pytest-mock
 
