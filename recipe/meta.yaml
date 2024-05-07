@@ -1,6 +1,6 @@
 {% set name = "pennylane" %}
 {% set version = "0.36.0" %}
-{% set build_num = 1 %}
+{% set build_num = 0 %}
 
 package:
   name: pennylane-suite
@@ -135,8 +135,8 @@ outputs:
         - python -c "import pennylane as qml; qml.about()"
         - pip check
         - pl-device-test --help
-        - pl-device-test --device lightning.qubit --shots None --skip-ops
-        - pl-device-test --device lightning.qubit --shots 100000 --skip-ops
+        - pl-device-test --device lightning.qubit --shots None --skip-ops  # [build_platform == target_platform]
+        - pl-device-test --device lightning.qubit --shots 100000 --skip-ops  # [build_platform == target_platform]
       requires:
         - flaky
         - pip
