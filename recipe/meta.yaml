@@ -46,10 +46,11 @@ outputs:
       run:
         - appdirs
         - autograd
-        - autoray >=0.6.1
+        - autoray >=0.6.11
         - cachetools
         - networkx
-        - numpy
+        - numpy <2.0
+        - packaging
         - python
         - requests
         - rustworkx
