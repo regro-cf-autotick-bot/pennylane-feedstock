@@ -1,5 +1,5 @@
 {% set name = "pennylane" %}
-{% set version = "0.36.0" %}
+{% set version = "0.37.0" %}
 {% set build_num = 0 %}
 
 package:
@@ -8,10 +8,10 @@ package:
 
 source:
   - url: https://github.com/PennyLaneAI/pennylane/archive/refs/tags/v{{ version }}.tar.gz
-    sha256: 10ae174b8fd47de12c1174fd5236c26b50ff40e679b658b3446660e063fb64e1
+    sha256: 3e5eaab9da28ac43099e5850fde0c5763bc4e37271804463fc35dab8b08e2f15
     folder: pennylane
   - url: https://github.com/PennyLaneAI/pennylane-lightning/archive/refs/tags/v{{ version }}.tar.gz
-    sha256: c5fb24bdaf2ebdeaf614bfb3a8bcc07ee83c2c7251a3893399bb0c189d2d1d01
+    sha256: 3f70e3e3b7e4d0f6a679919c0c83e451e129666b021bb529dd02eb915d0666a0
     folder: pennylane-lightning
 
 build:
@@ -46,10 +46,11 @@ outputs:
       run:
         - appdirs
         - autograd
-        - autoray >=0.6.1
+        - autoray >=0.6.11
         - cachetools
         - networkx
-        - numpy
+        - numpy <2.0
+        - packaging
         - python
         - requests
         - rustworkx
